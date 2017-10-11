@@ -14,10 +14,6 @@ function getRelations(contentType, allTypes) {
     try {
       name = allTypes.filter(type => type.sys.id === searchType)[0].name;
     } catch (e) {
-      // console.log(JSON.stringify(allTypes,null,2))
-      // console.log(searchType, '\n\n\n')
-      // console.log(e)
-      // throw `error: ${e}`
       name = 'UNKNOWN'
     }
     return name
@@ -30,9 +26,7 @@ function getRelations(contentType, allTypes) {
     } else if (linkType === LINK_TYPE_ENTRY) {
       relations[relType][fieldId] = validations.reduce((arr, validation) => {
         if (hasValues(validation.linkContentType)) {
-          _relations = arr.concat(validation.linkContentType.map(getTypeName))
-          console.log(JSON.stringify(_relations,null,2))
-          return _relations;
+          return arr.concat(validation.linkContentType.map(getTypeName));
         } else if (typeof validation.linkContentType === 'string') {
           return [validation.linkContentType];
         }
